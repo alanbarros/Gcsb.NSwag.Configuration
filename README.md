@@ -1,0 +1,1 @@
+# Gcsb.NSwag.Configuration
