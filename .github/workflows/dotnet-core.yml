@@ -15,7 +15,7 @@ jobs:
     - name: Local ls
       run: ls -lhart
     - name: Local
-      run: ls -la ./src/Gcsb.NSwag.Configuration
+      run: ls -la ../../
     - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
