@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - name: Local ls
-      run: ls -lhart
+      run: ls -lhart ../
     - name: Local
       run: ls -la ../../
     - uses: actions/checkout@v2
