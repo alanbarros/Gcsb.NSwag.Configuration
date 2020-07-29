@@ -23,7 +23,7 @@ jobs:
           NUGET_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
           
     - name: Teste variavel
-      run: env
+      run: echo ${{secrets.GH_TOKEN}}
 
     - name: Install dependencies
       run: |  
