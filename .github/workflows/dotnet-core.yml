@@ -13,15 +13,26 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
+        source-url: https://nuget.pkg.github.com/alanbarros/index.json
         dotnet-version: 3.1.301
+      env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
     - name: Install dependencies
       run: |  
           cd $GITHUB_WORKSPACE/src/Gcsb.NSwag.Configuration/
           dotnet restore
+          
     - name: Build
       run: |  
           cd $GITHUB_WORKSPACE/src/Gcsb.NSwag.Configuration/ 
           dotnet build --configuration Release --no-restore
+          
+    - name: Build solution and generate NuGet package
+      run: |  
+        cd $GITHUB_WORKSPACE/src/Gcsb.NSwag.Configuration/
+        dotnet pack -c Release -o out 
