@@ -15,14 +15,14 @@ jobs:
     - name: Local ls
       run: pwd
     - name: Local
-      run: ls -la src/Gcsb.NSwag.Configuration
+      run: ls -la
     - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
     - name: Install dependencies
-      run: dotnet restore src/Gcsb.NSwag.Configuration/Gcsb.NSwag.Configuration.csproj
+      run: dotnet restore $GITHUB_WORKSPACE/src/Gcsb.NSwag.Configuration/Gcsb.NSwag.Configuration.csproj
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
