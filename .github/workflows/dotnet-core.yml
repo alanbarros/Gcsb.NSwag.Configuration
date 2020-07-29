@@ -18,6 +18,8 @@ jobs:
       with:
         dotnet-version: 3.1.301
     - name: Install dependencies
-      run: dotnet restore $GITHUB_WORKSPACE/src/Gcsb.NSwag.Configuration/Gcsb.NSwag.Configuration.csproj
+      run: |  
+          cd $GITHUB_WORKSPACE/src/Gcsb.NSwag.Configuration/
+          dotnet restore
     - name: Build
-      run: dotnet build $GITHUB_WORKSPACE/src/Gcsb.NSwag.Configuration/Gcsb.NSwag.Configuration.csproj --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore
