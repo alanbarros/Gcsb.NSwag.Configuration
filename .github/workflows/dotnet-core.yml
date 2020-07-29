@@ -11,7 +11,6 @@ jobs:
     name: "Build"
     runs-on: ubuntu-latest
     steps:
-    - working-directory: $GITHUB_WORKSPACE/src/Gcsb.NSwag.Configuration/
     - uses: actions/checkout@v2      
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
