@@ -12,10 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Local ls
-      run: pwd
-    - name: Local
-      run: ls -la
     - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
@@ -24,6 +20,4 @@ jobs:
     - name: Install dependencies
       run: dotnet restore $GITHUB_WORKSPACE/src/Gcsb.NSwag.Configuration/Gcsb.NSwag.Configuration.csproj
     - name: Build
-      run: dotnet build --configuration Release --no-restore
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet build $GITHUB_WORKSPACE/src/Gcsb.NSwag.Configuration/Gcsb.NSwag.Configuration.csproj --configuration Release --no-restore
