@@ -20,7 +20,7 @@ jobs:
         source-url: https://nuget.pkg.github.com/alanbarros/index.json
         dotnet-version: 3.1.301
       env:
-          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NUGET_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
 
     - name: Install dependencies
       run: |  
