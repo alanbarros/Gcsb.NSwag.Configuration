@@ -8,17 +8,23 @@ on:
 
 jobs:
   build:
-
+    name: "Build"
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-      
+    - uses: actions/checkout@v2      
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
+    - name: Build Soluction
+      run: |  
+          cd $GITHUB_WORKSPACE/src/Gcsb.NSwag.Configuration/ 
+          dotnet build --configuration Release --no-restore
           
+  config:
+    name: "Config Package"
+    runs-on: ubuntu-latest
+    steps:      
     - name: Setup nuget package
       run: dotnet nuget add source https://nuget.pkg.github.com/alanbarros/index.json -n github -u alanbarros -p ${{secrets.GH_TOKEN}}
 
@@ -27,16 +33,19 @@ jobs:
           cd $GITHUB_WORKSPACE/src/Gcsb.NSwag.Configuration/
           dotnet restore
           
-    - name: Build
-      run: |  
-          cd $GITHUB_WORKSPACE/src/Gcsb.NSwag.Configuration/ 
-          dotnet build --configuration Release --no-restore
-          
-    - name: Build solution and generate NuGet package
+  pack:
+    name: "Create Package"
+    runs-on: ubuntu-latest
+    steps:          
+    - name: Generate NuGet package
       run: |  
         cd $GITHUB_WORKSPACE/src/Gcsb.NSwag.Configuration/
         dotnet pack -c Release -o out
         
+  push:
+    name: "Publish Package"
+    runs-on: ubuntu-latest
+    steps: 
     - name: Push generated package to GitHub registry
       run: |  
         cd $GITHUB_WORKSPACE/src/Gcsb.NSwag.Configuration/
