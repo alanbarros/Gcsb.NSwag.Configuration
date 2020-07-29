@@ -11,15 +11,14 @@ jobs:
     name: "Build"
     runs-on: ubuntu-latest
     steps:
+    - working-directory: $GITHUB_WORKSPACE/src/Gcsb.NSwag.Configuration/
     - uses: actions/checkout@v2      
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
     - name: Build Soluction
-      run: |  
-          cd $GITHUB_WORKSPACE/src/Gcsb.NSwag.Configuration/ 
-          dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore
           
   config:
     name: "Config Package"
