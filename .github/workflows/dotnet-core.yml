@@ -17,13 +17,10 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        source-url: https://nuget.pkg.github.com/alanbarros/index.json
         dotnet-version: 3.1.301
-      env:
-          NUGET_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
           
-    - name: Teste variavel
-      run: echo ${{secrets.GH_TOKEN}}
+    - name: Setup nuget package
+      run: dotnet nuget add source https://nuget.pkg.github.com/alanbarros/index.json -n github -u alanbarros -p ${{secrets.GH_TOKEN}}
 
     - name: Install dependencies
       run: |  
@@ -43,4 +40,4 @@ jobs:
     - name: Push generated package to GitHub registry
       run: |  
         cd $GITHUB_WORKSPACE/src/Gcsb.NSwag.Configuration/
-        dotnet nuget push out/*.nupkg --skip-duplicate --no-symbols true
+        dotnet nuget push out/*.nupkg --source "github" --skip-duplicate --no-symbols true
